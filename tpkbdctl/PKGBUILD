@@ -1,4 +1,4 @@
-# Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
+# Maintainer: Michael Unterkalmsteiner <miciu AT gmx DOT de>
 pkgname=tpkbdctl-git
 pkgver=20120814
 pkgrel=1
