@@ -1,7 +1,8 @@
-# Device name of the keyboard
-DEVNAME="hwid1"
+# Device name of the keyboard. Set if not autodetected correctly
+# and add to TPKBCTL_OPTIONS
+# DEVNAME="hwid1"
 
 # Change this to adjust the sensitivity, valid range 1-255
 TPKBDCTL_SENS="180"
 
-TPKBDCTL_OPTIONS="-d ${DEVNAME} -s ${TPKBDCTL_SENS}"
+TPKBDCTL_OPTIONS="-s ${TPKBDCTL_SENS}"

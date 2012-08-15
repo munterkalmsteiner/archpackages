@@ -1,6 +1,6 @@
 # Maintainer: Michael Unterkalmsteiner <miciu AT gmx DOT de>
 pkgname=tpkbdctl-git
-pkgver=20120814
+pkgver=20120815
 pkgrel=1
 pkgdesc="A tool that can be used to control features of the \"Lenovo ThinkPad USB Keyboard with TrackPoint\""
 arch=('i686' 'x86_64')
@@ -14,7 +14,7 @@ source=(10-tpkbdctl.rules
 	tpkbdctl.default
         tpkbdctl_runner)
 md5sums=('47dc611bbbef728ab5f016afbd3e86b5'
-         '04431dc10438137f17ce352ea9e14e80'
+         'cc40b7b7c32ed713aafabc0af385a168'
          '69fd4aafd2a21798f86d98a9eb2d6ecd')
 
 _gitroot=https://github.com/bseibold/tpkbdctl.git
