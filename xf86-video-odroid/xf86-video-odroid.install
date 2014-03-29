@@ -1,4 +1,6 @@
 # arg 1:  the new package version
 post_install() {
-  echo '>>> To enable the driver, copy /etc/X11/xorg.conf.odroid to /etc/X11/xorg.conf'
+	echo '>>> To enable the driver, copy /etc/X11/xorg.conf.odroid to /etc/X11/xorg.conf'
+	echo '>>>'
+	echo '>>> Make sure that the user is in the "video" group.'
 }
