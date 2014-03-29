@@ -1,0 +1,33 @@
+# Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
+pkgname=xf86-video-odroid
+pkgver=r4p0_00rel0
+pkgrel=1
+pkgdesc="Mali GPUs Linux EXA/DRI2 and X11 Display Drivers for Odroid U3"
+arch=(armv7h)
+url="http://malideveloper.arm.com/develop-for-mali/drivers/open-source-mali-gpus-linux-exadri2-and-x11-display-drivers/"
+license=('Apache')
+depends=('libump-odroid' 'libmali-odroid')
+makedepends=('xorg-server-devel')
+install=${pkgname}.install
+source=("http://malideveloper.arm.com/downloads/drivers/DX910/${pkgver//_/-}/DX910-SW-99003-${pkgver//_/-}.tgz" 'http://cgit.freedesktop.org/~cooperyuan/compat-api/plain/compat-api.h' 'xorg.conf.odroid')
+md5sums=('5b34fd3aaf4a6b50147608bc53af31e9'
+	'3e33ea9b73ac01125ce6c8b29efc8c42'
+	'301b7cc08b903d292db460ad0f968cf5') #generate with 'makepkg -g'
+
+build() {
+	cp compat-api.h "$srcdir/DX910-SW-99003-${pkgver//_/-}/x11/xf86-video-mali-0.0.1/src"
+	cd "$srcdir/DX910-SW-99003-${pkgver//_/-}/x11/xf86-video-mali-0.0.1"
+	./autogen.sh
+	./configure --prefix=/usr
+	make
+}
+
+package() {
+	cd "$srcdir/DX910-SW-99003-${pkgver//_/-}/x11/xf86-video-mali-0.0.1"
+	make DESTDIR="$pkgdir/" install
+
+	install -m755 -d "$pkgdir/etc/X11"
+	install -m644 "$srcdir/xorg.conf.odroid" "$pkgdir/etc/X11/"
+}
+
+

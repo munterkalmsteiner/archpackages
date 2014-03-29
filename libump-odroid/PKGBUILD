@@ -1,0 +1,30 @@
+# Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
+pkgname=libump-odroid
+pkgver=r4p0_00rel0
+pkgrel=1
+pkgdesc="Mali GPUs UMP User Space Drivers for Odroid U3"
+arch=(armv7h)
+url="http://malideveloper.arm.com/develop-for-mali/drivers/open-source-mali-gpus-ump-user-space-drivers-source-code-2/"
+license=('Apache')
+conflicts=('libump' 'libump-git')
+source=("http://malideveloper.arm.com/downloads/drivers/DX910/${pkgver//_/-}/DX910-SW-99006-${pkgver//_/-}.tgz" 'umplock_ioctl.h')
+md5sums=('e1faa6d841190493c726a4dc1ea9d07b' 
+	'0b248c9cff1c3234e4eaddae5f1bf688') #generate with 'makepkg -g'
+
+build() {
+	cd "$srcdir/DX910-SW-99006-${pkgver//_/-}/driver/src/ump"
+	CROSS_COMPILE= make
+}
+
+package() {
+        install -m755 -d "$pkgdir/usr/include/umplock"
+	install -m644 "$srcdir/umplock_ioctl.h" "$pkgdir/usr/include/umplock/"
+
+	cd "$srcdir/DX910-SW-99006-${pkgver//_/-}/driver/src/ump"
+	install -m755 -d "$pkgdir/usr/lib"
+	install -m644 libUMP.so "$pkgdir/usr/lib"
+
+	install -m755 -d "$pkgdir/usr/include/ump"
+	install -m644 include/ump/* "$pkgdir/usr/include/ump"
+}
+
