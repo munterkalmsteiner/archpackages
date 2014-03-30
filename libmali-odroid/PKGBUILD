@@ -15,6 +15,17 @@ package() {
 	tar xzf "$srcdir/mali400_2.1-13_armhf.tar.gz"
 	install -m755 -d "$pkgdir/usr/lib"
 	install -m644 "$srcdir/usr/lib/libMali.so" "$pkgdir/usr/lib/"
-}
+	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libEGL.so.1.0.0"
+	ln -s "/usr/lib/libEGL.so.1.0.0" "$pkgdir/usr/lib/libEGL.so.1" 
+	ln -s "/usr/lib/libEGL.so.1" "$pkgdir/usr/lib/libEGL.so" 
+	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libGLESv1_CM.so.1.1.0" 
+	ln -s "/usr/lib/libGLESv1_CM.so.1.1.0" "$pkgdir/usr/lib/libGLESv1_CM.so.1" 
+	ln -s "/usr/lib/libGLESv1_CM.so.1" "$pkgdir/usr/lib/libGLESv1_CM.so"
+	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libGLESv2.so.2.0.0" 
+	ln -s "/usr/lib/libGLESv2.so.2.0.0" "$pkgdir/usr/lib/libGLESv2.so.2"
+	ln -s "/usr/lib/libGLESv2.so.2" "$pkgdir/usr/lib/libGLESv2.so" 
+	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libOpenVG.so"
+	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libOpenVGU.so" 
+}	
 
 
