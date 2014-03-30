@@ -11,21 +11,32 @@ source=('http://dn.odroid.com/MALI400_R3P2/20130222/mali_packages.tar.gz')
 md5sums=('779b500ff537cbbbd525909b0db6798c') #generate with 'makepkg -g'
 
 package() {
-	deb2targz "$srcdir/mali400_2.1-13_armhf.deb" 
-	tar xzf "$srcdir/mali400_2.1-13_armhf.tar.gz"
-	install -m755 -d "$pkgdir/usr/lib"
-	install -m644 "$srcdir/usr/lib/libMali.so" "$pkgdir/usr/lib/"
-	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libEGL.so.1.0.0"
-	ln -s "/usr/lib/libEGL.so.1.0.0" "$pkgdir/usr/lib/libEGL.so.1" 
-	ln -s "/usr/lib/libEGL.so.1" "$pkgdir/usr/lib/libEGL.so" 
-	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libGLESv1_CM.so.1.1.0" 
-	ln -s "/usr/lib/libGLESv1_CM.so.1.1.0" "$pkgdir/usr/lib/libGLESv1_CM.so.1" 
-	ln -s "/usr/lib/libGLESv1_CM.so.1" "$pkgdir/usr/lib/libGLESv1_CM.so"
-	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libGLESv2.so.2.0.0" 
-	ln -s "/usr/lib/libGLESv2.so.2.0.0" "$pkgdir/usr/lib/libGLESv2.so.2"
-	ln -s "/usr/lib/libGLESv2.so.2" "$pkgdir/usr/lib/libGLESv2.so" 
-	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libOpenVG.so"
-	ln -s "/usr/lib/libMali.so" "$pkgdir/usr/lib/libOpenVGU.so" 
+	deb2targz "$srcdir"/mali400_2.1-13_armhf.deb
+	tar xzf "$srcdir"/mali400_2.1-13_armhf.tar.gz
+	install -m755 -d "$pkgdir"/usr/lib
+	install -m644 "$srcdir"/usr/lib/libMali.so "$pkgdir"/usr/lib/
+	ln -s /usr/lib/libMali.so "$pkgdir"/usr/lib/libEGL.so.1.0.0
+	ln -s /usr/lib/libEGL.so.1.0.0 "$pkgdir"/usr/lib/libEGL.so.1
+	ln -s /usr/lib/libEGL.so.1 "$pkgdir"/usr/lib/libEGL.so
+	ln -s /usr/lib/libMali.so "$pkgdir"/usr/lib/libGLESv1_CM.so.1.1.0
+	ln -s /usr/lib/libGLESv1_CM.so.1.1.0 "$pkgdir"/usr/lib/libGLESv1_CM.so.1
+	ln -s /usr/lib/libGLESv1_CM.so.1 "$pkgdir"/usr/lib/libGLESv1_CM.so
+	ln -s /usr/lib/libMali.so "$pkgdir"/usr/lib/libGLESv2.so.2.0.0
+	ln -s /usr/lib/libGLESv2.so.2.0.0 "$pkgdir"/usr/lib/libGLESv2.so.2
+	ln -s /usr/lib/libGLESv2.so.2 "$pkgdir"/usr/lib/libGLESv2.so
+	ln -s /usr/lib/libMali.so "$pkgdir"/usr/lib/libOpenVG.so
+	ln -s /usr/lib/libMali.so "$pkgdir"/usr/lib/libOpenVGU.so
+
+	deb2targz "$srcdir"/mali400-dev_2.1-13_armhf.deb
+	tar xzf "$srcdir"/mali400-dev_2.1-13_armhf.tar.gz
+	install -m755 -d "$pkgdir"/usr/include/{EGL,GLES,GLES2,KHR,VG}
+	install -m644 "$srcdir"/usr/include/EGL/* "$pkgdir"/usr/include/EGL/
+	install -m644 "$srcdir"/usr/include/GLES/* "$pkgdir"/usr/include/GLES/
+	install -m644 "$srcdir"/usr/include/GLES2/* "$pkgdir"/usr/include/GLES2/
+	install -m644 "$srcdir"/usr/include/KHR/* "$pkgdir"/usr/include/KHR/
+	install -m644 "$srcdir"/usr/include/VG/* "$pkgdir"/usr/include/VG/
+	install -m755 -d "$pkgdir"/usr/lib/pkgconfig
+	install -m644 "$srcdir"/usr/lib/pkgconfig/* "$pkgdir"/usr/lib/pkgconfig/
 }	
 
 
