@@ -1,0 +1,102 @@
+# Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
+pkgname=xbmc-odroid
+_gitname='xbmc'
+pkgver=12.2
+pkgrel=1
+pkgdesc="xbmc"
+arch=(armv7h)
+url="http://xbmc.org"
+license=('GPL' 'LGPL')
+depends=('hicolor-icon-theme' 'fribidi' 'lzo2' 'smbclient' 'libtiff' 'libva' 'libpng' 'libcdio' 'yajl' 'libmariadbclient' 'libjpeg-turbo' 'libsamplerate' 'libssh' 'libmicrohttpd' 'sdl_image' 'python2' 'libass' 'libmpeg2' 'libmad' 'libmodplug' 'jasper' 'rtmpdump' 'unzip' 'xorg-xdpyinfo' 'libbluray' 'libnfs' 'afpfs-ng' 'libshairport' 'avahi' 'bluez-libs' 'tinyxml' 'libplist' 'swig' 'taglib' 'libxslt')
+makedepends=('boost' 'cmake' 'gperf' 'nasm' 'zip' 'udisks' 'upower' 'git' 'autoconf' 'java-environment')
+optdepends=(
+  'lirc: remote controller support'
+  'udisks: automount external drives'
+  'upower: used to trigger power management functionality'
+  'unrar: access compressed files without unpacking them')
+options=('!strip')
+source=("$_gitname::git://github.com/mdrjr/xbmc.git#branch=Frodo")
+md5sums=('SKIP')
+
+build() {
+	cd ${_gitname}
+
+	git checkout b9097b34123bc0bb60aa22636e9d3f537ef996b5
+
+	# More fixes:
+	# - in Makefile, search LIBS and put -lX11 before all other libs
+	# - replace /lib/udev/rules.d/50-udev-default.rules with http://builder.mdrjr.net/tools/udev_default_xubuntu_update
+
+	msg2 "Bootstrapping XBMC"
+	./bootstrap
+
+	msg2 "Configuring XBMC"
+	export PYTHON_VERSION=2
+	export FFMPEG_CFLAGS=" \
+                -march=armv7-a \
+                -mfloat-abi=hard \
+                -mfpu=neon \
+                -ftree-vectorize \
+                -mvectorize-with-neon-quad \
+                -ffast-math \
+                -mcpu=cortex-a9 \
+                -mtune=cortex-9 \
+                -O3 \
+                -pipe \
+                -fstack-protector --param=ssp-buffer-size=4 \
+                -D_FORTIFY_SOURCE=2"
+	export CFLAGS=" \
+                -march=armv7-a \
+                -mfloat-abi=hard \
+                -mfpu=neon \
+                -ftree-vectorize \
+                -mvectorize-with-neon-quad \
+                -ffast-math \
+                -mcpu=cortex-a9 \
+                -mtune=cortex-a9 \
+                -O3 \
+                -pipe \
+                -fstack-protector --param=ssp-buffer-size=4 \
+                -D_FORTIFY_SOURCE=2"
+
+	./configure --prefix=/usr --exec_prefix=/usr \
+		--enable-neon \
+		--enable-gles \
+		--disable-gl \
+		--disable-vdpau \
+		--disable-vaapi \
+		--disable-crystalhd \
+		--disable-openmax \
+		--enable-exynos4 \
+		--disable-xrandr \
+		--disable-rsxs \
+		--disable-projectm \
+		--enable-non-free \
+		--enable-optical-drive \
+		--enable-libbluray \
+		--enable-dvdcss \
+		--disable-mid \
+		--disable-joystick \
+		--enable-debug \
+		--enable-optimizations \
+		--enable-ccache \
+		--disable-alsa \
+		--with-cpu=cortex-a9 \
+		--disable-sdl \
+		--disable-pulse \
+		--disable-x11 \
+		--enable-nfs \
+		--disable-samba
+
+	msg2 "Running make"
+	make 
+}
+
+
+package() {
+	cd ${_gitname}
+	make DESTDIR="$pkgdir" install
+
+	sed -i -e 's/python/python2/g' ${pkgdir}/usr/bin/xbmc
+}
+
