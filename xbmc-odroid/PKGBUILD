@@ -79,7 +79,7 @@ build() {
 		--disable-joystick \
 		--enable-debug \
 		--enable-optimizations \
-		--enable-ccache \
+		--disable-ccache \
 		--disable-alsa \
 		--with-cpu=cortex-a9 \
 		--disable-sdl \
@@ -89,7 +89,7 @@ build() {
 		--disable-samba
 
 	msg2 "Running make"
-	make 
+	make -j2
 }
 
 
