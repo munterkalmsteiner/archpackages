@@ -48,7 +48,7 @@ build() {
     --enable-xa
     # --help
 
-  make -j4
+  make 
 
   # fake installation
   mkdir $srcdir/fakeinstall
