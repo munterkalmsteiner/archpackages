@@ -10,7 +10,7 @@
 
 pkgbase=mesa-noegl
 pkgname=('mesa-noegl' 'mesa-libgl-noegl')
-pkgver=10.0.3
+pkgver=10.0.4
 pkgrel=1
 arch=('armv7h')
 makedepends=('python2' 'libxml2' 'libx11' 'glproto' 'libdrm' 'dri2proto' 'libxxf86vm' 'libxdamage'
@@ -19,7 +19,7 @@ url="http://mesa3d.sourceforge.net"
 license=('custom')
 source=(ftp://ftp.freedesktop.org/pub/mesa/${pkgver}/MesaLib-${pkgver}.tar.bz2
         LICENSE)
-md5sums=('5f9f463ef08129f6762106b434910adb'
+md5sums=('8b148869d2620b0720c8a8d2b7eb3e38'
          '5c65a0fe315dd347e09b1f2826a1df5a')
 
 build() {
@@ -48,7 +48,7 @@ build() {
     --enable-xa
     # --help
 
-  make
+  make -j4
 
   # fake installation
   mkdir $srcdir/fakeinstall
