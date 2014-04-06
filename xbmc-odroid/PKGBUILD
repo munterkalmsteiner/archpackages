@@ -7,7 +7,7 @@ pkgdesc="xbmc"
 arch=(armv7h)
 url="http://xbmc.org"
 license=('GPL' 'LGPL')
-depends=('hicolor-icon-theme' 'fribidi' 'lzo2' 'smbclient' 'libtiff' 'libva' 'libpng' 'libcdio' 'yajl' 'libmariadbclient' 'libjpeg-turbo' 'libsamplerate' 'libssh' 'libmicrohttpd' 'sdl_image' 'python2' 'libass' 'libmpeg2' 'libmad' 'libmodplug' 'jasper' 'rtmpdump' 'unzip' 'xorg-xdpyinfo' 'libbluray' 'libnfs' 'afpfs-ng' 'libshairport' 'avahi' 'bluez-libs' 'tinyxml' 'libplist' 'swig' 'taglib' 'libxslt')
+depends=('hicolor-icon-theme' 'fribidi' 'lzo2' 'libtiff' 'libva' 'libpng' 'libcdio' 'yajl' 'libmariadbclient' 'libjpeg-turbo' 'libsamplerate' 'libssh' 'libmicrohttpd' 'python2' 'libass' 'libmpeg2' 'libmad' 'libmodplug' 'jasper' 'rtmpdump' 'unzip' 'xorg-xdpyinfo' 'afpfs-ng' 'libshairport' 'avahi' 'bluez-libs' 'tinyxml' 'libplist' 'swig' 'taglib' 'libxslt' 'sdl_image' 'sdl_mixer')
 makedepends=('boost' 'cmake' 'gperf' 'nasm' 'zip' 'udisks' 'upower' 'git' 'autoconf' 'java-environment')
 optdepends=(
   'lirc: remote controller support'
@@ -60,33 +60,36 @@ build() {
                 -D_FORTIFY_SOURCE=2"
 
 	./configure --prefix=/usr --exec_prefix=/usr \
-		--enable-neon \
+		--enable-debug \
+		--enable-external-libraries \
+		--enable-exynos4 \
 		--enable-gles \
+		--enable-neon \
+		--enable-non-free \
+		--enable-optimizations \
+		--enable-sdl \
+		--enable-texturepacker \
+		--disable-afpclient \
+		--disable-airplay \
+		--disable-airtunes \
+		--disable-alsa \
+		--disable-ccache \
+		--disable-crystalhd \
+		--disable-dvdcss \
+		--disable-external-ffmpeg \
 		--disable-gl \
+		--disable-joystick \
+		--disable-mid \
+		--disable-nfs \
+		--disable-openmax \
+		--disable-optical-drive \
+		--disable-projectm \
+		--disable-pulse \
+		--disable-rsxs \
+		--disable-samba \
 		--disable-vdpau \
 		--disable-vaapi \
-		--disable-crystalhd \
-		--disable-openmax \
-		--enable-exynos4 \
-		--disable-xrandr \
-		--disable-rsxs \
-		--disable-projectm \
-		--enable-non-free \
-		--enable-optical-drive \
-		--enable-libbluray \
-		--enable-dvdcss \
-		--disable-mid \
-		--disable-joystick \
-		--enable-debug \
-		--enable-optimizations \
-		--disable-ccache \
-		--disable-alsa \
-		--with-cpu=cortex-a9 \
-		--disable-sdl \
-		--disable-pulse \
-		--disable-x11 \
-		--enable-nfs \
-		--disable-samba
+		--with-cpu=cortex-a9
 
 	msg2 "Running make"
 	make 
