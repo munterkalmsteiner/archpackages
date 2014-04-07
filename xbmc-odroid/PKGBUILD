@@ -14,7 +14,7 @@ optdepends=(
   'udisks: automount external drives'
   'upower: used to trigger power management functionality'
   'unrar: access compressed files without unpacking them')
-options=('!strip')
+#options=('!strip')
 source=("$_gitname::git://github.com/mdrjr/xbmc.git#branch=Frodo")
 md5sums=('SKIP')
 
@@ -60,7 +60,7 @@ build() {
                 -D_FORTIFY_SOURCE=2"
 
 	./configure --prefix=/usr --exec_prefix=/usr \
-		--enable-debug \
+		--enable-alsa \
 		--enable-external-libraries \
 		--enable-exynos4 \
 		--enable-gles \
@@ -72,9 +72,9 @@ build() {
 		--disable-afpclient \
 		--disable-airplay \
 		--disable-airtunes \
-		--disable-alsa \
 		--disable-ccache \
 		--disable-crystalhd \
+		--disable-debug \
 		--disable-dvdcss \
 		--disable-external-ffmpeg \
 		--disable-gl \
@@ -89,6 +89,7 @@ build() {
 		--disable-samba \
 		--disable-vdpau \
 		--disable-vaapi \
+		--with-platform=samsung-exynos \
 		--with-cpu=cortex-a9
 
 	msg2 "Running make"

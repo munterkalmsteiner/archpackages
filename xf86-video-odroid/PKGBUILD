@@ -1,6 +1,6 @@
 # Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
 pkgname=xf86-video-odroid
-pkgver=r4p0_00rel0
+pkgver=r3p2_01rel0
 pkgrel=1
 pkgdesc="Mali GPUs Linux EXA/DRI2 and X11 Display Drivers for Odroid U3"
 arch=(armv7h)
@@ -10,7 +10,7 @@ depends=('libump-odroid' 'libmali-odroid')
 makedepends=('xorg-server1.12-devel')
 install=${pkgname}.install
 source=("http://malideveloper.arm.com/downloads/drivers/DX910/${pkgver//_/-}/DX910-SW-99003-${pkgver//_/-}.tgz" 'http://cgit.freedesktop.org/~cooperyuan/compat-api/plain/compat-api.h' 'xorg.conf.odroid' '50-odroid.rules')
-md5sums=('5b34fd3aaf4a6b50147608bc53af31e9'
+md5sums=('6a86cf391832c989daddc092a6f67018'
 	'3e33ea9b73ac01125ce6c8b29efc8c42'
 	'301b7cc08b903d292db460ad0f968cf5'
 	'e58fbb1d5c6a7730003eecba7d8f174a') #generate with 'makepkg -g'

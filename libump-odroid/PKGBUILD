@@ -1,6 +1,6 @@
 # Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
 pkgname=libump-odroid
-pkgver=r4p0_00rel0
+pkgver=r3p2_01rel0
 pkgrel=1
 pkgdesc="Mali GPUs UMP User Space Drivers for Odroid U3"
 arch=(armv7h)
@@ -8,7 +8,7 @@ url="http://malideveloper.arm.com/develop-for-mali/drivers/open-source-mali-gpus
 license=('Apache')
 conflicts=('libump' 'libump-git')
 source=("http://malideveloper.arm.com/downloads/drivers/DX910/${pkgver//_/-}/DX910-SW-99006-${pkgver//_/-}.tgz" 'umplock_ioctl.h')
-md5sums=('e1faa6d841190493c726a4dc1ea9d07b' 
+md5sums=('51809f87880821029db994a7b20b5a44' 
 	'0b248c9cff1c3234e4eaddae5f1bf688') #generate with 'makepkg -g'
 
 build() {
