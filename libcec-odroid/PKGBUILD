@@ -6,7 +6,8 @@ pkgdesc="libcec for odroid"
 arch=('armv7h')
 url="http://libcec.pulse-eight.com/"
 license=('GPL')
-md5sums=('SKIP') #generate with 'makepkg -g'
+source=('50-libcec.rules')
+md5sums=('070e2b4fdb6032ba71af7cc996a87d81') #generate with 'makepkg -g'
 
 
 _gitname="libcec"
@@ -42,4 +43,7 @@ build() {
 package() {
 	cd "$srcdir/$_gitname-build"
 	make DESTDIR="$pkgdir/" install
+
+	install -m755 -d "$pkgdir/usr/lib/udev/rules.d"
+        install -m644 "$srcdir/50-libcec.rules" "$pkgdir/usr/lib/udev/rules.d/"
 }
