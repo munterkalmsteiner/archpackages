@@ -4,11 +4,14 @@ Section "Device"
 	Identifier "Mali-Fbdev"
 	Driver	"mali"
 	Option	"fbdev"           "/dev/fb1"
+
 	Option	"DRI2"            "true"
 	Option	"DRI2_PAGE_FLIP"  "false"
-	Option	"DRI2_WAIT_VSYNC" "true"
-	Option  "UMP_CACHED"      "false"
+	Option	"DRI2_WAIT_VSYNC" "false"
+
+	Option  "UMP_CACHED"      "true"
 	Option  "UMP_LOCK"        "false"
+
         Option  "G2D_DEVICE" "/dev/video3"
         Option  "G2D_ENABLE" "false"
 EndSection
@@ -23,3 +26,16 @@ Section "DRI"
 	Mode 0666
 EndSection
 
+Section "Monitor"
+         Identifier     "Generic Monitor"
+         Option         "DPMS" "Off"
+EndSection
+
+## disable automatic HDMI turn off
+Section "ServerLayout"
+        Identifier      "DefaultLayout"
+        Option          "BlankTime"     "0"
+        Option          "StandbyTime"   "0"
+        Option          "SuspendTime"   "0"
+        Option          "OffTime"       "0"
+EndSection
