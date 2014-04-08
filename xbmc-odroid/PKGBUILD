@@ -3,8 +3,8 @@ pkgname=xbmc-odroid
 _gitname='xbmc'
 pkgver=12.2
 pkgrel=1
-pkgdesc="xbmc"
-arch=(armv7h)
+pkgdesc="XBMC for Odroid U3"
+arch=('armv7h')
 url="http://xbmc.org"
 license=('GPL' 'LGPL')
 depends=('hicolor-icon-theme' 'fribidi' 'lzo2' 'libtiff' 'libva' 'libpng' 'libcdio' 'yajl' 'libmariadbclient' 'libjpeg-turbo' 'libsamplerate' 'libssh' 'libmicrohttpd' 'python2' 'libass' 'libmpeg2' 'libmad' 'libmodplug' 'jasper' 'rtmpdump' 'unzip' 'xorg-xdpyinfo' 'afpfs-ng' 'libshairport' 'avahi' 'bluez-libs' 'tinyxml' 'libplist' 'swig' 'taglib' 'libxslt' 'sdl_image' 'sdl_mixer')
@@ -21,11 +21,8 @@ md5sums=('SKIP')
 build() {
 	cd ${_gitname}
 
+	# Working commit from November 1, 2013
 	git checkout b9097b34123bc0bb60aa22636e9d3f537ef996b5
-
-	# More fixes:
-	# - in Makefile, search LIBS and put -lX11 before all other libs
-	# - replace /lib/udev/rules.d/50-udev-default.rules with http://builder.mdrjr.net/tools/udev_default_xubuntu_update
 
 	msg2 "Bootstrapping XBMC"
 	./bootstrap
@@ -64,6 +61,7 @@ build() {
 		--enable-external-libraries \
 		--enable-exynos4 \
 		--enable-gles \
+		--enable-libcec \
 		--enable-neon \
 		--enable-non-free \
 		--enable-optimizations \
