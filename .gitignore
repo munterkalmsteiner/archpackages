@@ -2,5 +2,5 @@
 *.tar.xz
 *.tar.gz
 *.tgz
-*/pkg/
-*/src/
+*pkg/
+*src/
