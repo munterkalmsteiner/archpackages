@@ -16,7 +16,7 @@ md5sums=('6a86cf391832c989daddc092a6f67018'
 	'e58fbb1d5c6a7730003eecba7d8f174a') #generate with 'makepkg -g'
 
 build() {
-	cp compat-api.h "$srcdir/DX910-SW-99003-${pkgver//_/-}/x11/xf86-video-mali-0.0.1/src"
+	mv compat-api.h "$srcdir/DX910-SW-99003-${pkgver//_/-}/x11/xf86-video-mali-0.0.1/src"
 	cd "$srcdir/DX910-SW-99003-${pkgver//_/-}/x11/xf86-video-mali-0.0.1"
 	./autogen.sh
 	./configure --prefix=/usr
