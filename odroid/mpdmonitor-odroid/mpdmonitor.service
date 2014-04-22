@@ -1,0 +1,11 @@
+[Unit]
+Description=Monitor mpd status and switch output
+Requires=mpd.service
+After=mpd.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/mpdmonitor.sh
+
+[Install]
+WantedBy=multi-user.target

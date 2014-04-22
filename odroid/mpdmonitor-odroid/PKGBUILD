@@ -1,0 +1,25 @@
+# Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
+pkgname=mpdmonitor-odroid
+pkgver=1
+pkgrel=0
+pkgdesc="Automatically switch between analog and HDMI output, depending on mpd's status"
+arch=('any')
+license=('GPL')
+depends=('mpd')
+install=${pkgname}.install
+source=(mpdmonitor.sh mpdmonitor.service)
+noextract=(mpdmonitor.sh mpdmonitor.service)
+md5sums=('9e0102ca0553d8ce34d30643ec8e1fbe'
+         '1ee519b9a52f2e2e6889a949b83c0ea3')
+build() {
+  cd "$srcdir"
+  chmod +x ./mpdmonitor.sh
+}
+
+package() {
+  cd "$srcdir"
+  mkdir -p "$pkgdir/usr/bin"
+  cp mpdmonitor.sh "$pkgdir/usr/bin/"
+  mkdir -p "$pkgdir/usr/lib/systemd/system"
+  cp mpdmonitor.service "$pkgdir/usr/lib/systemd/system/"
+}
