@@ -1,6 +1,6 @@
 # Maintainer: Michael Unterkalmsteiner <miciu@gmx.de>
 pkgname=xbmc-odroid
-_gitname='xbmc'
+_gitname="xbmc"
 pkgver=12.2
 pkgrel=1
 pkgdesc="XBMC for Odroid U3"
@@ -14,15 +14,15 @@ optdepends=(
   'udisks: automount external drives'
   'upower: used to trigger power management functionality'
   'unrar: access compressed files without unpacking them')
-#options=('!strip')
-source=("$_gitname::git://github.com/mdrjr/xbmc.git#branch=Frodo")
-md5sums=('SKIP')
+source=("$_gitname::git://github.com/mdrjr/xbmc.git#branch=Frodo" 'asound.conf')
+md5sums=('SKIP' 'a00dc6b297d4c4257a297c7966b7ec7b')
 
 build() {
 	cd ${_gitname}
 
 	# Working commit from November 1, 2013
 	git checkout b9097b34123bc0bb60aa22636e9d3f537ef996b5
+
 
 	msg2 "Bootstrapping XBMC"
 	./bootstrap
@@ -100,5 +100,8 @@ package() {
 	make DESTDIR="$pkgdir" install
 
 	sed -i -e 's/python/python2/g' ${pkgdir}/usr/bin/xbmc
+
+	install -m755 -d "$pkgdir/etc"
+        install -m644 "$srcdir/asound.conf" "$pkgdir/etc"
 }
 
