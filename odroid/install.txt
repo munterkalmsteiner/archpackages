@@ -1,0 +1,31 @@
+yaourt -S base-devel
+
+Get my pkgbuilds
+git clone git@github.com:mikmakmuk/archpackages.git
+
+Build mesa-noegl:
+makepkg -s
+
+yaourt -U mesa-noegl-10.0.4-1-armv7h.pkg.tar.xz mesa-libgl-noegl-10.0.4-1-armv7h.pkg.tar.xz
+
+build xorg-server1.12 and get dependencies:
+makepkg -s
+
+First install devel package...
+yaourt -U xorg-server1.12-devel-1.12.4-4-armv7h.pkg.tar.xz
+
+Then a dependency (add armv7h)...
+yaourt -S xf86-input-evdev1.12
+
+Then the remaining xorg-server packages
+yaourt -U xorg-server1.12-common-1.12.4-4-armv7h.pkg.tar.xz xorg-server1.12-xdmx-1.12.4-4-armv7h.pkg.tar.xz xorg-server1.12-xephyr-1.12.4-4-armv7h.pkg.tar.xz xorg-server1.12-xnest-1.12.4-4-armv7h.pkg.tar.xz xorg-server1.12-xvfb-1.12.4-4-armv7h.pkg.tar.xz xorg-server1.12-1.12.4-4-armv7h.pkg.tar.xz
+
+Build libump-odroid and install it 
+
+Build libmali-odroid and install it
+
+Build xf86-video-odroid and install it
+
+Install xfce4, glmark2 to test drivers (glmark2 does not build, skipping for now)
+
+SUCCESS: 20140407 --> drivers from 2012 and audio enabled. Likely that missing audio caused massive stutter.
