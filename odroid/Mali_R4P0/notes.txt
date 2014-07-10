@@ -1,0 +1,7 @@
+- xorg patch seems to be increase performance, maybe optional (see 
+  http://forum.odroid.com/viewtopic.php?f=8&t=4456&start=100#p37016)
+  This means we don't need special version of X...
+
+
+
+
