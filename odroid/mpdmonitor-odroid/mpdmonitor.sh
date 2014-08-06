@@ -21,7 +21,7 @@ if [ $? -eq 1 ]; then
 fi
 
 #Set to HDMI output by default
-su $USER -c "pacmd set-sink-port $DEVICE analog-output-speaker > /dev/null"
+su $USER -c "export PULSE_RUNTIME_PATH=/run/user/$USERID/pulse/ ; pacmd set-sink-port $DEVICE analog-output-speaker > /dev/null"
 
 while true; do
 	#This call blocks until some event change (stop/pause/play) happens in mpd	
@@ -29,10 +29,10 @@ while true; do
 	
 	if [ -n "$CURRENT" ]; then
 		#mpd is playing something, change to analog output
-               	su $USER -c "pacmd set-sink-port $DEVICE analog-output-headphones > /dev/null"
+               	su $USER -c "export PULSE_RUNTIME_PATH=/run/user/$USERID/pulse/ ; pacmd set-sink-port $DEVICE analog-output-headphones > /dev/null"
 	else
 		#mpd is not playing anything, change to hdmi output
-		su $USER -c "pacmd set-sink-port $DEVICE analog-output-speaker > /dev/null"
+		su $USER -c "export PULSE_RUNTIME_PATH=/run/user/$USERID/pulse/ ; pacmd set-sink-port $DEVICE analog-output-speaker > /dev/null"
 	fi
 done
 
