@@ -1,17 +1,17 @@
 # Maintainer: Michael Unterkalmsteiner <miciu AT gmx DOT de>
 pkgname=tpkbdctl-git
-pkgver=20120815
+pkgver=20150819
 pkgrel=1
 pkgdesc="A tool that can be used to control features of the \"Lenovo ThinkPad USB Keyboard with TrackPoint\""
 arch=('i686' 'x86_64')
 url="https://github.com/bseibold/tpkbdctl"
 license=('GPL2')
-depends=('linux>=3.0')
-makedepends=('git')
+depends=('linux>=3.0' 'python')
+makedepends=('git' 'python-setuptools')
 backup=('etc/default/tpkbdctl')
 install=tpkbdctl.install
 source=(10-tpkbdctl.rules
-	tpkbdctl.default
+	      tpkbdctl.default
         tpkbdctl_runner)
 md5sums=('47dc611bbbef728ab5f016afbd3e86b5'
          'cc40b7b7c32ed713aafabc0af385a168'
@@ -38,24 +38,19 @@ build() {
   mkdir "$srcdir/$_gitname-build"
   cd "$srcdir/$_gitname" && ls -A | grep -v .git | xargs -d '\n' cp -r -t ../$_gitname-build # do not copy over the .git folder
   cd "$srcdir/$_gitname-build"
-
-  #
-  # BUILD HERE
-  #
-  make
 }
 
 package() {
   cd "$srcdir/$_gitname-build"
-  make DESTDIR="$pkgdir/" install
+  python setup.py install --root=$pkgdir --optimize=1
 
-#install udev rule
+  #install udev rule
   install -D -m644 $srcdir/10-tpkbdctl.rules $pkgdir/etc/udev/rules.d/10-tpkbdctl.rules
 
-#install default configuration file
+  #install default configuration file
   install -D -m644 $srcdir/tpkbdctl.default $pkgdir/etc/default/tpkbdctl
 
-#install runner
+  #install runner
   install -D -m744 $srcdir/tpkbdctl_runner $pkgdir/usr/bin/tpkbdctl_runner
 }
 
