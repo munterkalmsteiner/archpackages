@@ -1,4 +1,4 @@
 # arg 1:  the new package version
 post_install() {
-	echo '>>> Change USER in /usr/bin/mpdmonitor.sh to the user who is running the pulseadio session'
+	echo '>>> Change USER in /usr/bin/mpdmonitor.sh to the user who is running the pulseaudio session'
 }
